@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':project1')
+    compile project(":project2")
+}
+
+task dist(type: Zip) {
+    dependsOn spiJar
+    from 'src/dist'
+    into('libs') {
+        from spiJar.archivePath
+        from configurations.runtime
+    }
+}
+
+artifacts {
+    archives dist
+}
